@@ -4,7 +4,7 @@ Semaine 4 : Intégration Cloud &amp; Construction Finale  Défi : Créez une app
 
 Bienvenue dans ce projet réalisé dans le cadre du Défi Semaine 4 : Intégration Cloud & Construction Finale.
 
-L’objectif était de concevoir une application web capable de générer automatiquement des haïkus en utilisant l’IA Claude 3 Haiku via AWS Bedrock, avec un backend Lambda + API Gateway, et de déployer l’ensemble sur le cloud avec AWS Amplify + S3.
+L’objectif était de concevoir une application d'IA moi jai choisi une application web capable de générer automatiquement des haïkus en utilisant l’IA Claude 3 Haiku via AWS Bedrock, avec un backend Lambda + API Gateway, et de déployer l’ensemble sur le cloud avec AWS Amplify + S3.
 
 ⚡ Fonctionnalités
 
