@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Claude 3 Haiku - AWS Bedrock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        pre {
+            background-color: #f3f3f3;
+            padding: 10px;
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Claude 3 Haiku - AWS Bedrock</h1>
+    <textarea id="prompt" placeholder="Écris ton prompt ici..."></textarea>
+    <br>
+    <button onclick="sendPrompt()">Envoyer</button>
+    <pre id="result">Ton haïku apparaîtra ici...</pre>
+
+    <script>
+        const apiUrl = "https://b085lcu674.execute-api.us-east-1.amazonaws.com/prod/generate"; // Remplace par ton URL
+
+        async function sendPrompt() {
+            const promptInput = document.getElementById("prompt").value.trim();
+            const resultContainer = document.getElementById("result");
+            resultContainer.textContent = "Génération en cours...";
+
+            // Si rien n'est saisi, envoie un prompt par défaut
+            const prompt = promptInput || "Écris un haïku sur le cloud AWS.";
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ prompt })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erreur API: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Affiche le haïku renvoyé ou un haïku par défaut si vide
+                resultContainer.textContent = data.result || 
+                    "Voici un haïku par défaut :\nNuages gris et blancs,\nServeurs puissants et fiables,\nAWS, ma maison.";
+            } catch (err) {
+                // En cas d'erreur réseau ou Lambda, affiche un haïku générique
+                resultContainer.textContent = 
+                    "Voici un haïku par défaut :\nNuages gris et blancs,\nServeurs puissants et fiables,\nAWS, ma maison.";
+            }
+        }
+    </script>
+</body>
+</html>
+
